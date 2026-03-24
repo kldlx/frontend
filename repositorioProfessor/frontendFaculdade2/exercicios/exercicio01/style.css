@@ -1,0 +1,286 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+html, body{
+    height: 100%;
+    margin: 0;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.50)), url("imagens/image\ copy\ 2.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+main{
+    flex: 1;
+}
+
+header{
+    display: flex;
+    background-color: aliceblue;
+}
+
+.logo img{
+   max-width: 70px;
+   height: auto;
+}
+
+.titulo h1{
+    margin-top: 13px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#divBusca{
+  background-color:#ffffff;
+  border:solid 1px;
+  border-radius:15px;
+  width:300px;
+  height: 32px;
+  margin-top: 13px;
+  margin-left: 490px;
+}
+
+#divBusca img{
+    margin-top: 2px;
+}
+
+#txtBusca{
+  float:left;
+  background-color:transparent;
+  padding-left:5px;
+  font-style:italic;
+  font-size:18px;
+  border-radius:15px;
+  border:none;
+  height:32px;
+  width:260px;
+}
+
+.carrinho img{
+    margin-top: 13px;
+    margin-left: 30px;
+}
+
+.navegacao{
+    margin-top: 20px;
+    margin-left: 280px;
+}
+
+.navegacao a {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: dashed;
+    color: black;
+    padding: 20px;
+}
+
+.carrossel{
+    display: flex;
+    align-items: center;
+    margin-left: 510px;
+}
+
+.setaE img{
+    margin-right: 20px;
+    width: 15px;
+    height: auto;
+}
+
+.setad img{
+    margin-left: 20px;
+    width: 15px;
+    height: auto;
+}
+
+.imgF img{
+    border-radius: 20px;
+}
+
+.fraseImpactante{
+    margin-left: 690px; 
+}
+
+.container-frutas{
+    display: flex;
+    margin-left: 205px;
+    margin-top: 50px;
+}
+
+.container-frutas img{
+    width: 250px;
+}
+ 
+.uva, .banana, .apple, .melancia, .goiaba{
+    padding: 20px;
+}
+
+.uva h2, .banana h2, .apple h2, .melancia h2, .goiaba h2{
+    text-align: center;
+    font-size: 25px;
+}
+
+.uva h3, .banana h3, .apple h3, .melancia h3, .goiaba h3{
+    text-align: center;
+    font-size: 23px;
+}
+
+.uva button, .banana button, .apple button, .melancia button, .goiaba button{
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+    height: auto;
+    font-size: 20px;
+    font-weight: 550;
+    margin-top: 10px;
+    border-radius: 10px;
+    border-color: antiquewhite;
+    background-color: aliceblue;
+    padding: 5px 5px;
+}
+
+footer{
+    background-color: aliceblue;
+    color: rgb(0, 0, 0);
+    padding: 20px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.container-contatos{
+    display: flex;
+    justify-content: center; /* centraliza */
+    gap: 20px; /* espaço entre links */
+    margin-bottom: 10px;
+}
+
+.container-contatos a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.container-contatos a:hover{
+    text-decoration: underline;
+}
+
+.direitos{
+    font-size: 15px;
+}
+
+.navegacao a{
+    position: relative;
+    transition: color 0.3s;
+}
+
+.navegacao a::after{
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 3px;
+    left: 0;
+    bottom: -5px;
+    background: green;
+    transition: 0.3s;
+}
+
+.navegacao a:hover{
+    color: green;
+}
+
+.navegacao a:hover::after{
+    width: 100%;
+}
+
+.uva, .banana, .apple, .melancia, .goiaba{
+    padding: 20px;
+    transition: 0.3s;
+    border-radius: 15px;
+}
+
+.uva:hover, .banana:hover, .apple:hover, .melancia:hover, .goiaba:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.container-frutas img{
+    width: 250px;
+    transition: transform 0.3s;
+}
+
+.container-frutas img:hover{
+    transform: scale(1.1);
+}
+
+.uva button, .banana button, .apple button, .melancia button, .goiaba button{
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.uva button:hover, .banana button:hover, .apple button:hover, .melancia button:hover, .goiaba button:hover{
+    background-color: green;
+    color: white;
+    transform: scale(1.1);
+}
+
+.carrinho img{
+    margin-top: 13px;
+    margin-left: 30px;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.carrinho img:hover{
+    transform: scale(1.2) rotate(10deg);
+}
+
+#divBusca{
+  transition: 0.3s;
+}
+
+#divBusca:hover{
+    width: 300px;
+}
+
+@keyframes aparecer{
+    from{
+        opacity:0;
+        transform: translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
+.container-frutas,
+.fraseImpactante,
+.carrossel{
+    animation: aparecer 1s ease;
+}
+
+@keyframes flutuar{
+    0%{transform: translateY(0px);}
+    50%{transform: translateY(-5px);}
+    100%{transform: translateY(0px);}
+}
+
+.container-frutas img{
+    animation: flutuar 3s infinite ease-in-out;
+}
+
+.container-contatos a{
+    transition: 0.3s;
+}
+
+.container-contatos a:hover{
+    color: green;
+    transform: scale(1.1);
+}
