@@ -28,15 +28,15 @@ export function App() {
         <form className='form' action=''>
           <div className='formRow'>
             <DefaultInput
-              labelText='task'
+              labelText='Digite sua atividade:'
               id='meuInput'
               type='text'
-              placeholder='Digite algo'
+              placeholder='Digite aqui a atividade que deseja'
             />
           </div>
 
           <div className='formRow'>
-            <p>Lorem ipsum dolor sit amet.</p>
+            <p>Chronus Pomodoro, o melhor marcador de tempo</p>
           </div>
 
           <div className='formRow'>
