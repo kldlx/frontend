@@ -1,59 +1,8 @@
-import { Container } from './components/Container';
-import { Logo } from './components/Logo';
-import { Menu } from './components/Menu';
-import { CountDown } from './components/CountDown';
-import { DefaultInput } from './components/DefaultInput';
-import { Cycles } from './components/Cycles';
-import { DefaultButton } from './components/DefaultButton';
-import { PlayCircleIcon } from 'lucide-react';
-import { Footer } from './components/Footer'; // <-- Importado!
+import { Home } from './pages/Home';
 
 import './styles/theme.css';
 import './styles/global.css';
 
 export function App() {
-  return (
-    <>
-      <Container>
-        <Logo />
-      </Container>
-      <Container>
-        <Menu />
-      </Container>
-      <Container>
-        <CountDown />
-      </Container>
-
-      <Container>
-        <form className='form' action=''>
-          <div className='formRow'>
-            <DefaultInput
-              labelText='Digite sua atividade:'
-              id='meuInput'
-              type='text'
-              placeholder='Digite aqui a atividade que deseja'
-            />
-          </div>
-
-          <div className='formRow'>
-            <p>Chronus Pomodoro, o melhor marcador de tempo</p>
-          </div>
-
-          <div className='formRow'>
-            <Cycles />
-          </div>
-
-          <div className='formRow'>
-            {/* Mantivemos apenas o botão principal de Play */}
-            <DefaultButton icon={<PlayCircleIcon />} />
-          </div>
-        </form>
-      </Container>
-
-      {/* Nosso novo rodapé entra aqui, no seu próprio Container! */}
-      <Container>
-        <Footer />
-      </Container>
-    </>
-  );
+  return <Home />;
 }
