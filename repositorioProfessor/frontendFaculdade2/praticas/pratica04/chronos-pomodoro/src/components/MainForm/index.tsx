@@ -33,7 +33,17 @@ export function MainForm() {
         />
       </div>
 
-      {/* ... (restante do código: Cycles, DefaultButton, etc) ... */}
+      <div className='formRow'>
+        <p>Próximo intervalo é de 25min</p>
+      </div>
+
+      <div className='formRow'>
+        <Cycles />
+      </div>
+
+      <div className='formRow'>
+        <DefaultButton icon={<PlayCircleIcon />} />
+      </div>
     </form>
   );
 }
