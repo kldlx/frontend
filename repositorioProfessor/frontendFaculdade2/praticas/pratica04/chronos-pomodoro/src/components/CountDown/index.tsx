@@ -1,11 +1,13 @@
 import styles from './styles.module.css';
+
+// 1. Importamos apenas o nosso Hook!
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 
 export function CountDown() {
-  // Puxamos apenas o 'state' de dentro do nosso contexto
-  const { state } = useTaskContext();
+  // 2. Chamamos o Hook
+  const taskContext = useTaskContext();
 
-  return (
-    <div className={styles.container}>{state.formattedSecondsRemaining}</div>
-  );
+  console.log(taskContext); // Teste no navegador!
+
+  return <div className={styles.container}>00:00</div>;
 }

@@ -1,7 +1,8 @@
 import { Home } from './pages/Home';
 import { useState } from 'react';
 import type { TaskStateModel } from './models/TaskStateModel';
-import { TaskContextProvider } from './contexts/TaskContext/TaskContextProvider';
+import { TaskContextProvider } from './contexts/TaskContext';
+
 
 import './styles/theme.css';
 import './styles/global.css';
@@ -30,3 +31,4 @@ export function App() {
     </TaskContextProvider>
   );
 }
+
