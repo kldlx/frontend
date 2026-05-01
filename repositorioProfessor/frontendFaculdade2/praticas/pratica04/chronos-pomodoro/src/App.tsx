@@ -1,7 +1,7 @@
 import { Home } from './pages/Home';
 import { useState } from 'react';
 import type { TaskStateModel } from './models/TaskStateModel';
-import { TaskContextProvider } from './contexts/TaskContext';
+import { TaskContextProvider } from './contexts/TaskContext/TaskContextProvider';
 
 
 import './styles/theme.css';
