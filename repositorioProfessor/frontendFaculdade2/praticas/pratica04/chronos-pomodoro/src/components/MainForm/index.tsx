@@ -3,16 +3,16 @@ import { Cycles } from '../Cycles';
 import { DefaultButton } from '../DefaultButton';
 import { DefaultInput } from '../DefaultInput';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
+import { TaskActionTypes } from '../../contexts/TaskContext/TaskActions';
 import type { TaskModel } from '../../models/TaskModel';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
+import { TimerWorkerManager } from '../../workers/TimerWorkerManager';
+import { Tips } from '../Tips';
 import { useRef } from 'react';
 
 export function MainForm() {
-  const { state, setState } = useTaskContext();
-
-  const nextCycle = getNextCycle(state.currentCycle);
-  const nextCycleType = getNextCycleType(nextCycle);
+  const { state, dispatch } = useTaskContext();
 
   const taskNameInput = useRef<HTMLInputElement>(null);
 
@@ -28,56 +28,38 @@ export function MainForm() {
       return;
     }
 
-    setState((prevState) => {
-      const nextCycle = getNextCycle(prevState.currentCycle);
-      const nextCycleType = getNextCycleType(nextCycle);
+    const nextCycle = getNextCycle(state.currentCycle);
+    const nextCycleType = getNextCycleType(nextCycle);
 
-      const newTask: TaskModel = {
-        id: Date.now().toString(),
-        name: taskName,
-        startDate: new Date(),
-        type: nextCycleType,
-        completeDate: null,
-        interruptDate: null,
-        duration: prevState.config[nextCycleType],
-      };
+    const newTask: TaskModel = {
+      id: Date.now().toString(),
+      name: taskName,
+      startDate: Date.now(),
+      completeDate: null,
+      interruptDate: null,
+      duration: state.config[nextCycleType],
+      type: nextCycleType,
+    };
 
-      const secondsRemaining = newTask.duration * 60;
+    // ✅ dispara reducer
+    dispatch({
+      type: TaskActionTypes.START_TASK,
+      payload: newTask,
+    });
 
-      return {
-        ...prevState,
-        activeTask: newTask,
-        currentCycle: nextCycle,
-        secondsRemaining,
-        formattedSecondsRemaining: '00:00',
-        tasks: [...prevState.tasks, newTask],
-      };
+    // ✅ usa o singleton do worker
+    const timerWorkerManager = TimerWorkerManager.getInstance();
+
+    timerWorkerManager.onmessage((event) => {
+      console.log('PRINCIPAL recebeu:', event.data);
     });
   }
 
   function handleInterruptTask() {
-    setState((prevState) => {
-      return {
-        ...prevState,
-        activeTask: null,
-        secondsRemaining: 0,
-        formattedSecondsRemaining: '00:00',
+    dispatch({ type: TaskActionTypes.INTERRUPT_TASK });
 
-        tasks: prevState.tasks.map((task) => {
-          if (
-            prevState.activeTask &&
-            prevState.activeTask.id === task.id
-          ) {
-            return {
-              ...task,
-              interruptDate: Date.now(), // ✅ CORRIGIDO
-            };
-          }
-
-          return task;
-        }),
-      };
-    });
+    // (opcional, mas já correto pro futuro)
+    TimerWorkerManager.getInstance().terminate();
   }
 
   return (
@@ -94,7 +76,7 @@ export function MainForm() {
       </div>
 
       <div className='formRow'>
-        <p>Próximo intervalo é de {state.config[nextCycleType]}min</p>
+        <Tips />
       </div>
 
       {state.currentCycle > 0 && (
@@ -121,7 +103,6 @@ export function MainForm() {
             color='red'
             icon={<StopCircleIcon />}
             onClick={handleInterruptTask}
-            key='stop-button'
           />
         )}
       </div>
