@@ -1,35 +1,41 @@
 let isRunning = false;
+let timeoutId = null; // Para podermos cancelar o timer se necessário
 
 self.onmessage = function (event) {
+  const state = event.data;
+  const { activeTask, secondsRemaining } = state;
+
+  // Se recebermos uma mensagem sem activeTask, paramos tudo
+  if (!activeTask) {
+    isRunning = false;
+    if (timeoutId) clearTimeout(timeoutId);
+    return;
+  }
+
+  // Se já estiver rodando, não iniciamos outro loop (evita acelerar o timer)
   if (isRunning) return;
 
   isRunning = true;
 
-  const state = event.data;
-  const { activeTask, secondsRemaining } = state;
-
-  if (!activeTask) return;
-
+  // Calculamos o momento exato em que a tarefa deve terminar
   const endDate = activeTask.startDate + secondsRemaining * 1000;
 
-  let countDownSeconds = Math.ceil(
-    (endDate - Date.now()) / 1000
-  );
-
   function tick() {
-    self.postMessage(countDownSeconds);
+    if (!isRunning) return; // Para o loop caso a tarefa seja cancelada
 
     const now = Date.now();
-    countDownSeconds = Math.floor(
-      (endDate - now) / 1000
-    );
+    let countDownSeconds = Math.round((endDate - now) / 1000);
 
     if (countDownSeconds <= 0) {
       self.postMessage(0);
+      isRunning = false;
       return;
     }
 
-    setTimeout(tick, 1000);
+    self.postMessage(countDownSeconds);
+    
+    // Agendamos o próximo tick
+    timeoutId = setTimeout(tick, 1000);
   }
 
   tick();

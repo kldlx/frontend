@@ -1,3 +1,4 @@
+// Importe o seu modelo de tarefa (ajuste o caminho se necessário)
 import type { TaskModel } from '../../models/TaskModel';
 
 export const TaskActionTypes = {
@@ -8,7 +9,6 @@ export const TaskActionTypes = {
   COMPLETE_TASK: 'COMPLETE_TASK',
 } as const;
 
-// AÇÕES COM PAYLOAD
 export type TaskActionsWithPayload =
   | {
       type: typeof TaskActionTypes.START_TASK;
@@ -19,12 +19,10 @@ export type TaskActionsWithPayload =
       payload: { secondsRemaining: number };
     };
 
-// AÇÕES SEM PAYLOAD
 export type TaskActionsWithoutPayload =
   | { type: typeof TaskActionTypes.RESET_STATE }
   | { type: typeof TaskActionTypes.INTERRUPT_TASK }
   | { type: typeof TaskActionTypes.COMPLETE_TASK };
 
-export type TaskActionModel =
-  | TaskActionsWithPayload
-  | TaskActionsWithoutPayload;
+// A união que define todas as ações possíveis no reducer
+export type TaskActionModel = TaskActionsWithPayload | TaskActionsWithoutPayload;
